@@ -65,7 +65,7 @@ default_args = {
 
 # [START instantiate_dag]
 dag = DAG(
-    'selumalai_spark',
+    dag_id='selumalai_spark',
     default_args=default_args,
     description='A simple tutorial DAG',
     start_date=datetime.datetime(2020, 4, 22),
