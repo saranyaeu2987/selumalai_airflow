@@ -74,13 +74,13 @@ copy_jar_task= BashOperator(
   )
 
 spark_task_1 = BashOperator(
-    task_id='spark_java',
+    task_id='spark_java_1',
     bash_command='spark-submit --class com.journaldev.sparkdemo.WordCounter1    /Users/e192270/Desktop/Saranya_Docs/HEB/Misc/JD-Spark-WordCount/target/JD-Spark-WordCount-1.0-SNAPSHOT.jar',
     dag=dag
 )
 
 spark_task_2 = BashOperator(
-    task_id='spark_java',
+    task_id='spark_java_2',
     bash_command='spark-submit --class com.journaldev.sparkdemo.SparkDeltaSQLExample   /Users/e192270/Desktop/Saranya_Docs/HEB/Misc/JD-Spark-WordCount/target/JD-Spark-WordCount-1.0-SNAPSHOT.jar',
     dag=dag
 )
