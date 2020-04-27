@@ -47,19 +47,6 @@ default_args = {
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-    # 'queue': 'bash_queue',
-    # 'pool': 'backfill',
-    # 'priority_weight': 10,
-    # 'end_date': datetime(2016, 1, 1),
-    # 'wait_for_downstream': False,
-    # 'dag': dag,
-    # 'sla': timedelta(hours=2),
-    # 'execution_timeout': timedelta(seconds=300),
-    # 'on_failure_callback': some_function,
-    # 'on_success_callback': some_other_function,
-    # 'on_retry_callback': another_function,
-    # 'sla_miss_callback': yet_another_function,
-    # 'trigger_rule': 'all_success'
 }
 # [END default_args]
 
@@ -86,13 +73,20 @@ copy_jar_task= BashOperator(
   bash_command='cp  /Users/e192270/Desktop/Saranya_Docs/HEB/Misc/JD-Spark-WordCount/target/JD-Spark-WordCount-1.0-SNAPSHOT.jar .'
   )
 
-spark_task = BashOperator(
+spark_task_1 = BashOperator(
+    task_id='spark_java',
+    bash_command='spark-submit --class com.journaldev.sparkdemo.WordCounter1    /Users/e192270/Desktop/Saranya_Docs/HEB/Misc/JD-Spark-WordCount/target/JD-Spark-WordCount-1.0-SNAPSHOT.jar',
+    dag=dag
+)
+
+spark_task_2 = BashOperator(
     task_id='spark_java',
     bash_command='spark-submit --class com.journaldev.sparkdemo.SparkDeltaSQLExample   /Users/e192270/Desktop/Saranya_Docs/HEB/Misc/JD-Spark-WordCount/target/JD-Spark-WordCount-1.0-SNAPSHOT.jar',
     dag=dag
 )
 
+
 # [END basic_task]
 
-first_task >> copy_jar_task >> spark_task
+first_task >> copy_jar_task >> [spark_task,spark_task_2]
 # [END tutorial]
