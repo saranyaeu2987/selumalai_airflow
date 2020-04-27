@@ -88,5 +88,5 @@ spark_task_2 = BashOperator(
 
 # [END basic_task]
 
-first_task >> copy_jar_task >> [spark_task,spark_task_2]
+first_task >> copy_jar_task >> [spark_task_1,spark_task_2]
 # [END tutorial]
